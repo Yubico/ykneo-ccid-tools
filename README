@@ -1,0 +1,17 @@
+YubiKey NEO CCID Tools
+======================
+
+This package hold tools for the YubiKey NEO in CCID mode.
+
+ykneo-ccid-modeswitch
+---------------------
+
+Tool to switch mode of the YubiKey NEO.  The YubiKey NEO can be in
+either of three modes:
+
+1) OTP mode
+2) OTP/CCID hybrid mode
+3) CCID mode
+
+When the YubiKey NEO is in either mode 2 or 3 you can use this tool to
+switch it to any other mode.
