@@ -1,0 +1,56 @@
+---
+versions: [0.0.0]
+#The above line is automatically updated by running 'make release', it MUST remain on line 2 of this file.
+---
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ykneo-ccid-tools : YubiKey NEO CCID Tools" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ykneo-ccid-tools</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Yubico/ykneo-ccid-tools">View on GitHub</a>
+
+          <h1 id="project_title">ykneo-ccid-tools</h1>
+          <h2 id="project_tagline">YubiKey NEO CCID Tools</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Releases</h1>
+        <dl>
+          {% for version in page.versions reversed %}
+          <dt>ykneo-ccid-tools {{ version }}</dt>
+            <dd><a href="releases/ykneo-ccid-tools-{{ version }}.tgz">ykneo-ccid-tools-{{ version }}.tgz</a></dd>
+            <dd><a href="releases/ykneo-ccid-tools-{{ version }}.tgz.sig">ykneo-ccid-tools-{{ version }}.tgz.sig</a></dd>
+          {% endfor %}
+        </dl>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ykneo-ccid-tools maintained by <a href="https://github.com/Yubico">Yubico</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
