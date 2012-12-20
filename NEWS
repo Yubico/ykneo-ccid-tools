@@ -2,6 +2,8 @@ ykneo-ccid-tools NEWS -- History of user-visible changes.     -*- outline -*-
 
 * Version 0.0.1 (unreleased)
 
+** Command line parameter handling.
+
 * Version 0.0.0 (released 2012-12-20)
 
 ** Initial release.
