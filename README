@@ -9,9 +9,63 @@ ykneo-ccid-modeswitch
 Tool to switch mode of the YubiKey NEO.  The YubiKey NEO can be in
 either of three modes:
 
-1) OTP mode
-2) OTP/CCID hybrid mode
-3) CCID mode
+ * OTP mode
+ * OTP/CCID hybrid mode
+ * CCID mode
 
 When the YubiKey NEO is in either mode 2 or 3 you can use this tool to
 switch it to any other mode.
+
+Dependencies
+------------
+
+PCSCLite is needed: http://pcsclite.alioth.debian.org/
+
+How to get and install it depends on your operating systems, here are
+some hints:
+
+  (Debian/Ubuntu) apt-get install libpcsclite-dev
+
+License
+-------
+
+The project is copyrighted by Yubico and licensed under a BSD license.
+See the file COPYING for exact wording.  For any copyright year range
+specified as YYYY-ZZZZ in this package note that the range specifies
+every single year in that closed interval.
+
+Building
+--------
+
+The build system uses Autoconf, to set up the build system run:
+
+  ./configure
+
+Then build the code and install the binaries:
+
+  make all install
+
+Using
+-----
+
+If your YuibKey NEO is in either the OTP/CCID or CCID mode you can
+use this tool like this to put it in OTP mode:
+
+  ykneo-ccid-modeswitch -m0
+
+or to put it in OTP/CCID mode:
+
+  ykneo-ccid-modeswitch -m1
+
+or to put it in CCID mode:
+
+  ykneo-ccid-modeswitch -m2
+
+After the tool has completed, you will need to power-cycle the device
+by removing it from the USB port and re-insert it.
+
+Feedback
+--------
+
+See the Google Group yubico-devel:
+http://groups.google.com/group/yubico-devel
