@@ -166,7 +166,7 @@ int main(void)
     apdu.apdu2.p2 = 0;
     apdu.apdu2.lc = sizeof(DEVICE_CONFIG);
 
-    apdu.apdu2.config.mode = MODE_CCID; // | MODE_FLAG_EJECT;
+    apdu.apdu2.config.mode = MODE_OTP; // | MODE_FLAG_EJECT;
     apdu.apdu2.config.crTimeout = DEFAULT_CHAL_TIMEOUT;
     apdu.apdu2.config.autoEjectTime = 0;
 
