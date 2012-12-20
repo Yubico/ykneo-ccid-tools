@@ -1,5 +1,6 @@
 *~
 .deps/
+ChangeLog
 Makefile
 Makefile.in
 NEO_Config.o

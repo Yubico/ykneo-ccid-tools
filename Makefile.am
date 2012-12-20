@@ -32,7 +32,12 @@ bin_PROGRAMS = ykneo-ccid-modeswitch
 ykneo_ccid_modeswitch_SOURCES = NEO_Config.c neo_if.h ykdef.h
 ykneo_ccid_modeswitch_LDADD = $(PCSC_LIBS)
 
-release: distcheck
+# Maintainer rules.
+
+ChangeLog:
+	cd $(srcdir) && git2cl > ChangeLog
+
+release:
 	@if test -z "$(KEYID)"; then \
 		echo "Try this instead:"; \
 		echo "  make release KEYID=[PGPKEYID]"; \
@@ -40,22 +45,25 @@ release: distcheck
 		echo "  make release KEYID=2117364A"; \
 		exit 1; \
 	fi
-	gpg --detach-sign --default-key $(KEYID) $(PACKAGE)-$(VERSION).tgz
-	gpg --verify $(PACKAGE)-$(VERSION).tgz.sig
-
+	head -3 $(srcdir)/NEWS | \
+		grep -q "Version $(VERSION) .released `date -I`" || \
+		(echo 'error: Update date/version in $(srcdir)/NEWS.'; exit 1)
+	rm -f $(srcdir)/ChangeLog
+	make ChangeLog distcheck
+	gpg --detach-sign --default-key $(KEYID) $(PACKAGE)-$(VERSION).tar.gz
+	gpg --verify $(PACKAGE)-$(VERSION).tar.gz.sig
 	git tag -sm "$(PACKAGE)-$(VERSION)" $(PACKAGE)-$(VERSION)
 	git push
 	git push --tags
-
-	git add $(PACKAGE)-$(VERSION).tgz
-	git add $(PACKAGE)-$(VERSION).tgz.sig
+	git add $(PACKAGE)-$(VERSION).tar.gz
+	git add $(PACKAGE)-$(VERSION).tar.gz.sig
 	git stash
 	git checkout gh-pages
 	git stash pop
-	git mv $(PACKAGE)-$(VERSION).tgz releases/
-	git mv $(PACKAGE)-$(VERSION).tgz.sig releases/
-	x=$$(ls -1 releases/*.tgz | awk -F\- '{print $$3}' | sed 's/.tgz//' | paste -sd ',' -);sed -i -e "2s/\[.*\]/[$$x]/" releases.html
+	git mv $(PACKAGE)-$(VERSION).tar.gz releases/
+	git mv $(PACKAGE)-$(VERSION).tar.gz.sig releases/
+	x=$$(ls -1 releases/*.tar.gz | awk -F\- '{print $$4}' | sed 's/.tar.gz//' | paste -sd ',' -); sed -i -e "2s/\[.*\]/[$$x]/" releases.html
 	git add releases.html
-	git commit -m "Added tarball for release $(VERSION)"
+	git commit -m "Added tarball for release $(VERSION)."
 	git push
 	git checkout master
