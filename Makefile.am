@@ -31,3 +31,31 @@ AM_CPPFLAGS = $(PCSC_CFLAGS)
 bin_PROGRAMS = ykneo-ccid-modeswitch
 ykneo_ccid_modeswitch_SOURCES = NEO_Config.c neo_if.h ykdef.h
 ykneo_ccid_modeswitch_LDADD = $(PCSC_LIBS)
+
+release: distcheck
+	@if test -z "$(KEYID)"; then \
+		echo "Try this instead:"; \
+		echo "  make release KEYID=[PGPKEYID]"; \
+		echo "For example:"; \
+		echo "  make release KEYID=2117364A"; \
+		exit 1; \
+	fi
+	gpg --detach-sign --default-key $(KEYID) $(PACKAGE)-$(VERSION).tgz
+	gpg --verify $(PACKAGE)-$(VERSION).tgz.sig
+
+	git tag -sm "$(PACKAGE)-$(VERSION)" $(PACKAGE)-$(VERSION)
+	git push
+	git push --tags
+
+	git add $(PACKAGE)-$(VERSION).tgz
+	git add $(PACKAGE)-$(VERSION).tgz.sig
+	git stash
+	git checkout gh-pages
+	git stash pop
+	git mv $(PACKAGE)-$(VERSION).tgz releases/
+	git mv $(PACKAGE)-$(VERSION).tgz.sig releases/
+	x=$$(ls -1 releases/*.tgz | awk -F\- '{print $$3}' | sed 's/.tgz//' | paste -sd ',' -);sed -i -e "2s/\[.*\]/[$$x]/" releases.html
+	git add releases.html
+	git commit -m "Added tarball for release $(VERSION)"
+	git push
+	git checkout master
