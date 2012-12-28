@@ -52,6 +52,10 @@ ykneo-ccid-modeswitch.1: $(ykneo_ccid_modeswitch_SOURCES) \
 
 # Maintainer rules.
 
+indent:
+	indent *.c *.h
+	indent *.c *.h
+
 ChangeLog:
 	cd $(srcdir) && git2cl > ChangeLog
 
