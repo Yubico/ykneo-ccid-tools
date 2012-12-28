@@ -7,6 +7,9 @@ NEO_Config.o
 aclocal.m4
 autom4te.cache/
 build-aux/
+cmdline.c
+cmdline.h
+cmdline.o
 config.log
 config.status
 configure
@@ -17,4 +20,5 @@ m4/ltsugar.m4
 m4/ltversion.m4
 m4/lt~obsolete.m4
 ykneo-ccid-modeswitch
+ykneo-ccid-modeswitch.1
 ykneo-ccid-tools-*.tar.gz

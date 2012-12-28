@@ -30,7 +30,25 @@ AM_CPPFLAGS = $(PCSC_CFLAGS)
 
 bin_PROGRAMS = ykneo-ccid-modeswitch
 ykneo_ccid_modeswitch_SOURCES = NEO_Config.c neo_if.h ykdef.h
+ykneo_ccid_modeswitch_SOURCES += cmdline.ggo cmdline.c cmdline.h
 ykneo_ccid_modeswitch_LDADD = $(PCSC_LIBS)
+
+cmdline.c cmdline.h: cmdline.ggo Makefile.am
+	gengetopt --input $^
+
+BUILT_SOURCES = cmdline.c cmdline.h
+MAINTAINERCLEANFILES = $(BUILT_SOURCES)
+
+# Doc.
+
+dist_man_MANS = ykneo-ccid-modeswitch.1
+MAINTAINERCLEANFILES += $(dist_man_MANS)
+
+ykneo-ccid-modeswitch.1: $(ykneo_ccid_modeswitch_SOURCES) \
+		$(top_srcdir)/configure.ac
+	$(HELP2MAN) --no-info \
+		--name="YubiKey NEO Mode Switcher" \
+		--output=$@ $(top_builddir)/ykneo-ccid-modeswitch$(EXEEXT)
 
 # Maintainer rules.
 

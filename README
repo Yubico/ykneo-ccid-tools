@@ -9,12 +9,14 @@ ykneo-ccid-modeswitch
 Tool to switch mode of the YubiKey NEO.  The YubiKey NEO can be in
 either of three modes:
 
- * OTP mode
- * OTP/CCID hybrid mode
- * CCID mode
+ 1) OTP mode
+ 2) OTP/CCID hybrid mode
+ 3) CCID mode
 
-When the YubiKey NEO is in either mode 2 or 3 you can use this tool to
-switch it to any other mode.
+When the YubiKey NEO is in any non-OTP-mode you can use this tool to
+switch it to any other mode.  To switch the YubiKey NEO from OTP mode
+to the combined OTP/CCID or CCID mode, use the external
+"ykpersonalize" tool.
 
 Dependencies
 ------------
@@ -48,8 +50,8 @@ Then build the code and install the binaries:
 Using
 -----
 
-If your YuibKey NEO is in either the OTP/CCID or CCID mode you can
-use this tool like this to put it in OTP mode:
+If your YuibKey NEO is in either the OTP/CCID or CCID mode you can use
+this tool like this to put it in OTP mode:
 
   ykneo-ccid-modeswitch -m0
 
