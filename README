@@ -66,6 +66,47 @@ or to put it in CCID mode:
 After the tool has completed, you will need to power-cycle the device
 by removing it from the USB port and re-insert it.
 
+Development
+-----------
+
+To build this project from version controlled sources you need at
+least the following tools:
+
+* autoconf
+* automake
+* help2man
+* gengetopt
+
+How to get and install them depends on your operating systems, here
+are some hints:
+
+  (Debian/Ubuntu) apt-get install autoconf automake help2man gengetopt
+
+Then bootstrap the package using
+
+  autoreconf -fvi
+
+And then build as usual, using
+
+  ./configure
+
+followed by
+
+  make
+
+That should produce a normal build directory.
+
+To make releases you will need additional tools including:
+
+* git
+* gpg
+* git2cl
+
+How to get and install them depends on your operating systems, here
+are some hints:
+
+  (Debian/Ubuntu) apt-get install git git2cl
+
 Feedback
 --------
 
