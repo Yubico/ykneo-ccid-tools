@@ -44,6 +44,15 @@
 
 #include "cmdline.h"
 
+#if defined(__GNUC__)
+#define PACK __attribute__ ((__packed__))
+#else
+#define PACK
+#endif
+#if defined(_WIN32)
+#pragma pack(push, 1)
+#endif
+
 typedef struct
 {
   BYTE cla;
@@ -63,7 +72,7 @@ typedef struct
   {
     BYTE data[0x100];
     DEVICE_CONFIG config;
-  };
+  } PACK;
 } APDU_2;
 
 static void
