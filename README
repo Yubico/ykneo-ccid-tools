@@ -73,6 +73,7 @@ least the following tools:
 
 * autoconf
 * automake
+* libtool
 * help2man
 * gengetopt
 
